@@ -27,6 +27,7 @@ public class HeroController {
 
     @GetMapping("{name}")
     public String findByName(@PathVariable String name) {
+        System.out.println();
         return HEROES.stream()
                 .filter(hero -> hero.equalsIgnoreCase(name))
                 .findFirst().orElse("");
