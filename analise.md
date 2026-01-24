@@ -1,11 +1,17 @@
 # 🛡️ Relatório de Code Review
-**Data:** 2026-01-24 | **Nota:** 4/10
+**Data:** 2026-01-24 | **Nota:** 5/10
 
 ## 🔍 Análise Técnica
-O diff mostra a remoção completa do bloco de changelog que continha a entrada **[2026-01-23]** feat(user): adiciona funcionalidade de persistência de usuário. Não há nenhuma adição de linha, apenas exclusão. Isso significa que o README agora fica vazio em relação ao histórico de alterações, o que pode dificultar a rastreabilidade de mudanças futuras. A remoção pode ter sido feita por engano ou como parte de uma refatoração do formato do changelog. Se a intenção era limpar entradas antigas, seria melhor manter um histórico consolidado ou usar um arquivo separado para changelog.
+O diff mostra uma alteração no arquivo **README.md** que envolve a atualização da seção **CHANGELOG**. A linha original foi removida e substituída por uma única linha que contém um texto aparentemente codificado (ou corrompido). Não há código funcional, apenas documentação. A mudança não envolve injeção de dependência, refatoração de lógica ou qualquer alteração de arquitetura.
 
 ## 💡 Dicas do Sênior
-- [ ] Verificar se a remoção foi intencional; se sim, documentar a razão.
-- [ ] Considerar manter um arquivo CHANGELOG.md separado para não perder histórico.
-- [ ] Se a intenção era reformatar, adicionar a nova entrada com o formato correto.
-- [ ] Usar ferramentas de CI para validar que o README não fica vazio após commits.
+- [ ] **Corrigir a formatação**: a nova linha está em um formato ilegível; deve ser escrita em Markdown puro, sem caracteres de escape ou codificação.
+- [ ] **Separar a data e a descrição**: use o padrão `**[YYYY-MM-DD]** feat(user): descrição`.
+- [ ] **Validar o conteúdo**: se o texto foi copiado de outra fonte, verifique se não há caracteres invisíveis ou base64.
+- [ ] **Adicionar tags de versão**: se houver release, inclua `vX.Y.Z` para facilitar o rastreamento.
+- [ ] **Testar a visualização**: abra o README no GitHub para garantir que a alteração renderiza corretamente.
+- [ ] **Automatizar com lint**: use um linter de Markdown para evitar erros futuros.
+
+---
+
+**Observação**: Como não há código de aplicação envolvido, não há impacto direto na qualidade de software, mas a documentação precisa estar clara para futuros desenvolvedores.
