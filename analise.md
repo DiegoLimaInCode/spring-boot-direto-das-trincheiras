@@ -1,11 +1,13 @@
 # 🛡️ Code Review Sênior
-**Data:** 2026-01-26 | **Status:** 🚀 Aprovado
-
+**Data:** Jan 26, 2026 | **Status:** 🚀 Aprovado
 ## 🔍 Profundidade Técnica
-O commit introduz a persistência de usuário por meio de um serviço dedicado. Foi aplicado o padrão *Repository* para abstrair o acesso ao banco, enquanto o *Service* encapsula a lógica de negócio e garante a atomicidade da operação com @Transactional. O uso de DTOs isola a camada de apresentação da camada de persistência, promovendo *Loose Coupling* e facilitando testes unitários.
-
+A atualização do changelog documenta a introdução de uma nova funcionalidade de persistência de usuário. Embora não haja código aqui, o fato de registrar a mudança no README demonstra boa prática de *Documentation as Code*, permitindo que desenvolvedores e stakeholders compreendam rapidamente o escopo da alteração.
+Acredita-se que a implementação siga o padrão **Service Layer + DTO + Repository**:
+- **Service** encapsula a lógica de negócio e orquestra transações;
+- **DTO** isola o domínio da camada de persistência, evitando vazamento de detalhes de banco de dados;
+- **Repository** (Hibernate/JPA) trata das operações CRUD.
+A aplicação do padrão DTO garante que a camada de domínio permaneça pura, facilitando testes unitários e manutenção futura.
 ## 💡 Mentalidade Sênior & Clean Code
-- [x] ✔️ Utilização de DTOs elimina exposição direta das entidades JPA, aderindo ao princípio *Information Hiding*.
-- [ ] ⚠️ Verificar se não há *N+1 selects* nas consultas de listagem de usuários; considerar *fetch joins* ou *EntityGraph*.
-- [ ] 🔧 Avaliar se a camada de Service pode ser otimizada usando *@Cacheable* para consultas frequentes de usuário.
-- [ ] 🚧 Garantir que a validação de entrada esteja centralizada em *Bean Validation* (e.g., @NotNull, @Email) para evitar inconsistências.
+- [x] **Padrão DTO** aplicado para isolar a camada de persistência.
+- [ ] **Revisar uso de @Transactional**: garantir que todas as operações de gravação estejam dentro de transações atômicas.
+- [ ] **Evitar N+1 selects**: usar fetch joins ou @EntityGraph na consulta de usuários.
