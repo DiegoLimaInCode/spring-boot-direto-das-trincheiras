@@ -1,15 +1,11 @@
-# 🛡️ Relatório de Code Review
-**Data:** 2026-01-24 | **Nota:** 4/10
-## 🔍 Análise Técnica
-O commit removeu todo o conteúdo do README.md, resultando em um arquivo vazio. Essa mudança elimina a documentação que descreve a funcionalidade de persistência de usuário, dificultando a compreensão e o onboarding. Não há refatoração de código ou injeção de dependência envolvida, apenas a remoção de documentação.
-## 💡 Dicas do Sênior
-- [ ] Preserve a documentação ao fazer commits que alteram arquivos importantes.
-- [ ] Use branches e revisões de código para garantir que a documentação não seja perdida.
-- [ ] Inclua notas de versão no README para rastrear mudanças.
-- [ ] Considere adicionar um arquivo CHANGELOG.md para histórico de versões.
-- [ ] Utilize templates de commit que exijam descrição clara.
-- [ ] Automatize verificações de presença de README em CI.
-- [ ] Documente as novas funcionalidades no README antes de commitar.
-- [ ] Revise o commit message para refletir a remoção intencional ou não.
-- [ ] Eduque a equipe sobre a importância de manter a documentação.
-- [ ] Adicione um pequeno guia de boas práticas de documentação.
+# 🛡️ Code Review Sênior
+**Data:** 2026-01-26 | **Status:** 🚀 Aprovado
+
+## 🔍 Profundidade Técnica
+O commit introduz a persistência de usuário por meio de um serviço dedicado. Foi aplicado o padrão *Repository* para abstrair o acesso ao banco, enquanto o *Service* encapsula a lógica de negócio e garante a atomicidade da operação com @Transactional. O uso de DTOs isola a camada de apresentação da camada de persistência, promovendo *Loose Coupling* e facilitando testes unitários.
+
+## 💡 Mentalidade Sênior & Clean Code
+- [x] ✔️ Utilização de DTOs elimina exposição direta das entidades JPA, aderindo ao princípio *Information Hiding*.
+- [ ] ⚠️ Verificar se não há *N+1 selects* nas consultas de listagem de usuários; considerar *fetch joins* ou *EntityGraph*.
+- [ ] 🔧 Avaliar se a camada de Service pode ser otimizada usando *@Cacheable* para consultas frequentes de usuário.
+- [ ] 🚧 Garantir que a validação de entrada esteja centralizada em *Bean Validation* (e.g., @NotNull, @Email) para evitar inconsistências.
