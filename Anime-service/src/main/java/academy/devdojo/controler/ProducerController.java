@@ -2,7 +2,11 @@ package academy.devdojo.controler;
 
 import academy.devdojo.domain.Producer;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.function.ServerRequest;
 
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
@@ -32,12 +36,15 @@ public class ProducerController {
                 .orElse(null);
     }
 
-    @PostMapping
-    public Producer save(@RequestBody(required = false) Producer producer) {
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE,
+            headers = "x-api-key")
+    public ResponseEntity<Producer> save(@RequestBody(required = false) Producer producer) {
         producer.setId(ThreadLocalRandom.current().nextLong(100_000));
         Producer.getProducers().add(producer);
+        
+        return ResponseEntity.status(HttpStatus.CREATED).body(producer);
 
-        return producer;
+
     }
 
 }
